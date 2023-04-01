@@ -1,0 +1,50 @@
+.listing
+  padding: 0
+  width: 100%
+  max-width: 100%
+  position: relative
+  margin: 1em 0 1em !important
+  border-radius: $radius
+  font-family: $family-code
+
+  .listing-title
+    margin: 0 !important
+    padding: .3em 0em .3em .75em
+    font-size: 0.95em
+    font-style: normal
+    font-weight: 500
+    background: rgba(200, 200, 200, .15)
+
+    *
+      color: inherit
+
+  .listing-body
+    overflow: auto
+    font-size: 0.85em
+    font-weight: inherit
+    font-style: inherit
+    background: rgb(250, 250, 250)
+
+    table
+      width: auto
+
+      tr td
+        border: none
+
+      tr:not(:first-child) td
+        padding-top: 0
+
+      tr:not(:last-child) td
+        padding-bottom: 0
+
+      .gutter, .code
+        line-height: 1rem
+
+      .gutter
+        background: rgba(200, 200, 200, .15)
+        text-align: right
+
+      .code
+        white-space: pre
+        word-wrap: normal
+        text-align: left
