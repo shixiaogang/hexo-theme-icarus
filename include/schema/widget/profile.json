@@ -25,6 +25,14 @@
             ],
             "nullable": true
         },
+        "email": {
+            "type": "string",
+            "description": "Author's email",
+            "examples": [
+                "Your email"
+            ],
+            "nullable": true
+        },
         "location": {
             "type": "string",
             "description": "Author's current location",

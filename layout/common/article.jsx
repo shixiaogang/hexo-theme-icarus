@@ -56,19 +56,6 @@ module.exports = class extends Component {
                             }}></span>}
                             {/* author */}
                             {page.author ? <span class="level-item"> {page.author} </span> : null}
-                            {/* Categories */}
-                            {page.categories && page.categories.length ? <span class="level-item">
-                                {(() => {
-                                    const categories = [];
-                                    page.categories.forEach((category, i) => {
-                                        categories.push(<a class="link-muted" href={url_for(category.path)}>{category.name}</a>);
-                                        if (i < page.categories.length - 1) {
-                                            categories.push(<span>&nbsp;/&nbsp;</span>);
-                                        }
-                                    });
-                                    return categories;
-                                })()}
-                            </span> : null}
                             {/* Read time */}
                             {article && article.readtime && article.readtime === true ? <span class="level-item">
                                 {(() => {
@@ -83,14 +70,11 @@ module.exports = class extends Component {
                             }}></span> : null}
                         </div>
                     </div> : null}
+
                     {/* Title */}
                     {page.title !== '' && index ? <p class="title is-3 is-size-4-mobile"><a class="link-muted" href={url_for(page.link || page.path)}>{page.title}</a></p> : null}
                     {page.title !== '' && !index ? <h1 class="title is-3 is-size-4-mobile">{page.title}</h1> : null}
-                    {/* Content/Excerpt */}
-                    <div class="content" dangerouslySetInnerHTML={{ __html: index && page.excerpt ? page.excerpt : page.content }}></div>
-                    {/* Licensing block */}
-                    {!index && article && article.licenses && Object.keys(article.licenses)
-                        ? <ArticleLicensing.Cacheable page={page} config={config} helper={helper} /> : null}
+
                     {/* Tags */}
                     {!index && page.tags && page.tags.length ? <div class="article-tags is-size-7 mb-4">
                         <span class="mr-2">#</span>
@@ -98,10 +82,30 @@ module.exports = class extends Component {
                             return <a class="link-muted mr-2" rel="tag" href={url_for(tag.path)}>{tag.name}</a>;
                         })}
                     </div> : null}
-                    {/* "Read more" button */}
-                    {index && page.excerpt ? <a class="article-more button is-small is-size-7" href={`${url_for(page.link || page.path)}#more`}>{__('article.more')}</a> : null}
+
+                    {/* Content/Excerpt */}
+                    <div class="content" dangerouslySetInnerHTML={{ __html: index && page.excerpt ? page.excerpt : page.content }}></div>
+
+                    {/* Licensing block */}
+                    {!index && article && article.licenses && Object.keys(article.licenses)
+                        ? <ArticleLicensing.Cacheable page={page} config={config} helper={helper} /> : null}
+
                     {/* Share button */}
                     {!index ? <Share config={config} page={page} helper={helper} /> : null}
+
+                    {index ? <div class="level">
+                        <div class="level-start">
+                            {page.tags && page.tags.length ? <div class="article-tags is-size-7">
+                                <span class="mr-2">#</span>
+                                {page.tags.map(tag => {
+                                    return <a class="link-muted mr-2" rel="tag" href={url_for(tag.path)}>{tag.name}</a>;
+                                })}
+                            </div> : null}
+                        </div>
+                        <div class="level-end">
+                            {page.excerpt ? <a class="article-more button is-small is-size-7" href={`${url_for(page.link || page.path)}#more`}>{__('article.more')}</a> : null}
+                        </div>
+                    </div> : null}
                 </article>
             </div>
             {/* Donate button */}

@@ -16,7 +16,7 @@ module.exports = class extends Component {
 
         return <html lang={language ? language.substr(0, 2) : ''}>
             <Head site={site} config={config} helper={helper} page={page} />
-            <body class={`is-${columnCount}-column`}>
+            <body class={columnCount === 1 ? 'is-1-column' : 'is-3-column'}>
                 <Navbar config={config} helper={helper} page={page} />
                 <section class="section">
                     <div class="container">
@@ -26,8 +26,7 @@ module.exports = class extends Component {
                                 'order-2': true,
                                 'column-main': true,
                                 'is-12': columnCount === 1,
-                                'is-8-tablet is-8-desktop is-8-widescreen': columnCount === 2,
-                                'is-8-tablet is-8-desktop is-6-widescreen': columnCount === 3
+                                'is-8-tablet is-8-desktop is-6-widescreen': columnCount !== 1
                             })} dangerouslySetInnerHTML={{ __html: body }}></div>
                             <Widgets site={site} config={config} helper={helper} page={page} position={'left'} />
                             <Widgets site={site} config={config} helper={helper} page={page} position={'right'} />
